@@ -2,29 +2,38 @@ import React, {useState} from "react";
 
 
 
-export function TextForm(props) {
+export function TextForm() {
 
     const [text , setText] = useState("");
-    const handleUpClick = () =>{
+    const handleUpClick = (event) =>{
         let newText = text.toUpperCase();
         setText(newText);
-       
+        event.preventDefault();
 
     }
 
-    const handleLowerClick =()=>{
+    const handleLowerClick =(event)=>{
+      event.preventDefault();
         let newText = text.toLowerCase();
         setText(newText);
     }
 
     const handleOnchange = (event) =>{
+      event.preventDefault();
         setText(event.target.value);
       
     }
     
-  const handleClearText = () => {
+  const handleClearText = (event) => {
+    event.preventDefault();
      setText("");
   }
+
+  const handleExtraSpaces = (event) => {
+    event.preventDefault();
+    let newText = text.split(/[ ]+/);
+    setText(newText.join(" "));
+}
 
   return (
     <>
@@ -41,16 +50,20 @@ export function TextForm(props) {
               onChange={handleOnchange} 
               value={text}
             ></textarea>
-            <div class="col-auto m-2">
-              <button disabled={text.length===0}  type="submit"  onClick={handleUpClick} class="btn btn-primary mb-3 mx-1">
+            <div className="col-auto m-2">
+              <button disabled={text.length===0}  type="submit"  onClick={handleUpClick} className="btn btn-primary mb-3 mx-1">
                 Convert Uppercase
               </button>
-              <button disabled={text.length===0}  type="submit"  onClick={handleLowerClick} class="btn btn-primary mb-3 mx-1 ">
+              <button disabled={text.length===0}  type="submit"  onClick={handleLowerClick} className="btn btn-primary mb-3 mx-1 ">
                 Convert Lowercase
               </button>
-              <button disabled={text.length===0}  type="submit"  onClick={handleClearText} class="btn btn-primary mb-3 mx-1">
+              <button disabled={text.length===0}  type="submit"  onClick={handleClearText} className="btn btn-primary mb-3 mx-1">
                 Clear Text
               </button>
+              <button disabled={text.length===0}  type="submit"  onClick={handleExtraSpaces} className="btn btn-primary mb-3 mx-1">
+                Clear Extra Spaces
+              </button>
+              
             </div>
           </div>
         </form>
