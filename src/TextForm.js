@@ -2,7 +2,7 @@ import React, {useState} from "react";
 
 
 
-export function TextForm() {
+export function TextForm(props) {  // parent is App.js so here passing props to parent to child relationship 
 
     const [text , setText] = useState("");
     const handleUpClick = (event) =>{
@@ -37,7 +37,7 @@ export function TextForm() {
 
   return (
     <>
-      <div className="container">
+      <div className="container"  style={{color: props.mode==='dark'?'white':'#042743'}}>
         <form>
           <div className="mb-3">
             <label for="exampleFormControlTextarea1" className="form-label m-4">
@@ -49,6 +49,8 @@ export function TextForm() {
               rows="6"
               onChange={handleOnchange} 
               value={text}
+      
+              style={{backgroundColor: props.mode==='dark'?'#13466e':'white', color: props.mode==='dark'?'white':'#042743'}}
             ></textarea>
             <div className="col-auto m-2">
               <button disabled={text.length===0}  type="submit"  onClick={handleUpClick} className="btn btn-primary mb-3 mx-1">

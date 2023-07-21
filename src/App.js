@@ -9,13 +9,15 @@ import AboutUs from './AboutUs';
 function App() {
   const [mode , setMode] = useState("light")  // default background color of navbar
   const toggleMode = () => {
-      if(mode == 'light'){
-        setMode("dark");
+      if(mode == 'light'){    // light is a boostrap class so we are passing here it as string literals
+        setMode("dark");    // dark also class of boostrap 
+        document.body.style.backgroundColor = '#042743';
         // showAlert("Dark mode has been enabled" , "success");
       }
       else
       {
         setMode("light");
+        document.body.style.backgroundColor = 'white';
         // showAlert("Light  mode has been enabled" , "success");
       }
   } 
@@ -23,7 +25,7 @@ function App() {
   return (
     <>
      <Navbar title="NanduChopade"  mode={mode}  toggleMode={toggleMode} />
-     <TextForm/>
+     <TextForm  mode={mode} />
      {/* <AboutUs/> */}
     </>
   );
